@@ -1,0 +1,1281 @@
+{
+  "id": "ai-title-escrow-fraud-curative",
+  "title": "TitleGuard Closing Control",
+  "tagline": "Title curative, payoff verification, escrow fraud prevention, closing disclosure, and policy issuance",
+  "industry": "Title and Escrow Operations",
+  "port": 4527,
+  "accent": "#b45309",
+  "valueLabel": "Closings protected",
+  "value": "$892M",
+  "workflows": [
+    {
+      "id": "title-search",
+      "title": "Title Search Examination",
+      "description": "Review vesting, legal description, liens, judgments, taxes, easements, and chain-of-title exceptions.",
+      "fields": [
+        {
+          "key": "orderId",
+          "label": "Title Order ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "property",
+          "label": "Property",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "vesting",
+          "label": "Current Vesting",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "examinerNotes",
+          "label": "Examiner Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "orderId": "Title Order ID STD-2026-104",
+            "property": "Property STD-2026-104",
+            "vesting": "Current Vesting STD-2026-104",
+            "examinerNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "orderId": "Title Order ID RISK-2026-227",
+            "property": "Property RISK-2026-227",
+            "vesting": "Current Vesting RISK-2026-227",
+            "examinerNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "orderId": "Title Order ID EXC-2026-319",
+            "property": "Property EXC-2026-319",
+            "vesting": "Current Vesting EXC-2026-319",
+            "examinerNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "curative",
+      "title": "Curative Requirement Management",
+      "description": "Track releases, satisfactions, probate, entity, judgment, tax, HOA, and legal-description requirements.",
+      "fields": [
+        {
+          "key": "requirementId",
+          "label": "Requirement ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "requirementType",
+          "label": "Requirement Type",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "targetDate",
+          "label": "Target Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "curativeNotes",
+          "label": "Curative Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "requirementId": "Requirement ID STD-2026-104",
+            "requirementType": "Requirement Type STD-2026-104",
+            "targetDate": "2026-09-08",
+            "curativeNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "requirementId": "Requirement ID RISK-2026-227",
+            "requirementType": "Requirement Type RISK-2026-227",
+            "targetDate": "2026-08-19",
+            "curativeNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "requirementId": "Requirement ID EXC-2026-319",
+            "requirementType": "Requirement Type EXC-2026-319",
+            "targetDate": "2026-08-10",
+            "curativeNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "payoff",
+      "title": "Payoff & Wire Verification",
+      "description": "Verify lender identity, payoff statement, wiring instructions, call-back, change detection, and approval.",
+      "fields": [
+        {
+          "key": "lender",
+          "label": "Payoff Lender",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "payoffAmount",
+          "label": "Payoff Amount",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "callbackNumber",
+          "label": "Verified Callback Number",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "verificationNotes",
+          "label": "Verification Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "lender": "Payoff Lender STD-2026-104",
+            "payoffAmount": 285000,
+            "callbackNumber": "Verified Callback Number STD-2026-104",
+            "verificationNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "lender": "Payoff Lender RISK-2026-227",
+            "payoffAmount": 875000,
+            "callbackNumber": "Verified Callback Number RISK-2026-227",
+            "verificationNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "lender": "Payoff Lender EXC-2026-319",
+            "payoffAmount": 142500,
+            "callbackNumber": "Verified Callback Number EXC-2026-319",
+            "verificationNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "escrow-fraud",
+      "title": "Escrow Fraud Detection",
+      "description": "Detect instruction changes, account anomalies, email compromise, impersonation, and unauthorized disbursement risk.",
+      "fields": [
+        {
+          "key": "transactionId",
+          "label": "Transaction ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "riskSignal",
+          "label": "Risk Signal",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "fundsAtRisk",
+          "label": "Funds at Risk",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "investigationNotes",
+          "label": "Investigation Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "transactionId": "Transaction ID STD-2026-104",
+            "riskSignal": "Risk Signal STD-2026-104",
+            "fundsAtRisk": 285000,
+            "investigationNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "transactionId": "Transaction ID RISK-2026-227",
+            "riskSignal": "Risk Signal RISK-2026-227",
+            "fundsAtRisk": 875000,
+            "investigationNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "transactionId": "Transaction ID EXC-2026-319",
+            "riskSignal": "Risk Signal EXC-2026-319",
+            "fundsAtRisk": 142500,
+            "investigationNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "closing-disclosure",
+      "title": "Closing Disclosure Reconciliation",
+      "description": "Reconcile lender CD, settlement statement, fees, credits, prorations, payoffs, and cash to close.",
+      "fields": [
+        {
+          "key": "closingId",
+          "label": "Closing ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "cashToClose",
+          "label": "Cash to Close",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "ledgerBalance",
+          "label": "Escrow Ledger Balance",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "varianceNotes",
+          "label": "Variance Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "closingId": "Closing ID STD-2026-104",
+            "cashToClose": 285000,
+            "ledgerBalance": 285000,
+            "varianceNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "closingId": "Closing ID RISK-2026-227",
+            "cashToClose": 875000,
+            "ledgerBalance": 875000,
+            "varianceNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "closingId": "Closing ID EXC-2026-319",
+            "cashToClose": 142500,
+            "ledgerBalance": 142500,
+            "varianceNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "disbursement",
+      "title": "Controlled Disbursement",
+      "description": "Enforce funding, recording, good funds, authorization, positive pay, and dual approval before release.",
+      "fields": [
+        {
+          "key": "closingId",
+          "label": "Closing ID",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "disbursementAmount",
+          "label": "Disbursement Amount",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "recordingStatus",
+          "label": "Recording Status",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "releaseNotes",
+          "label": "Release Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "closingId": "Closing ID STD-2026-104",
+            "disbursementAmount": 285000,
+            "recordingStatus": "Recording Status STD-2026-104",
+            "releaseNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "closingId": "Closing ID RISK-2026-227",
+            "disbursementAmount": 875000,
+            "recordingStatus": "Recording Status RISK-2026-227",
+            "releaseNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "closingId": "Closing ID EXC-2026-319",
+            "disbursementAmount": 142500,
+            "recordingStatus": "Recording Status EXC-2026-319",
+            "releaseNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "recording",
+      "title": "Recording & Post-Closing",
+      "description": "Track eRecording, rejection, correction, original documents, trailing instruments, and final package.",
+      "fields": [
+        {
+          "key": "instrument",
+          "label": "Instrument",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "county",
+          "label": "County",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "recordingDate",
+          "label": "Recording Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "recordingNotes",
+          "label": "Recording Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "instrument": "Instrument STD-2026-104",
+            "county": "County STD-2026-104",
+            "recordingDate": "2026-09-08",
+            "recordingNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "instrument": "Instrument RISK-2026-227",
+            "county": "County RISK-2026-227",
+            "recordingDate": "2026-08-19",
+            "recordingNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "instrument": "Instrument EXC-2026-319",
+            "county": "County EXC-2026-319",
+            "recordingDate": "2026-08-10",
+            "recordingNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "title": "Title Policy Issuance",
+      "description": "Validate commitment, endorsements, exceptions, premium, insured parties, recording, and policy delivery.",
+      "fields": [
+        {
+          "key": "policyNumber",
+          "label": "Policy Number",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "insured",
+          "label": "Insured",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "coverageAmount",
+          "label": "Coverage Amount",
+          "type": "currency",
+          "required": true
+        },
+        {
+          "key": "policyNotes",
+          "label": "Policy Notes",
+          "type": "textarea",
+          "required": false
+        }
+      ],
+      "states": [
+        "intake",
+        "analyzing",
+        "review",
+        "approved",
+        "closed"
+      ],
+      "examples": [
+        {
+          "id": "standard",
+          "label": "Fill Standard Case",
+          "values": {
+            "policyNumber": "WC-26-184920",
+            "insured": "Insured STD-2026-104",
+            "coverageAmount": 285000,
+            "policyNotes": "Complete: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "high-risk",
+          "label": "Fill High-Risk Case",
+          "values": {
+            "policyNumber": "GL-26-771305",
+            "insured": "Insured RISK-2026-227",
+            "coverageAmount": 875000,
+            "policyNotes": "Critical exception: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        },
+        {
+          "id": "exception",
+          "label": "Fill Exception Case",
+          "values": {
+            "policyNumber": "WC-26-492118",
+            "insured": "Insured EXC-2026-319",
+            "coverageAmount": 142500,
+            "policyNotes": "Reviewer follow-up: source evidence, financial impact, control context, and documented reviewer rationale are available for analysis."
+          }
+        }
+      ],
+      "aiActions": [
+        {
+          "id": "assess",
+          "label": "Assess Risk & Value"
+        },
+        {
+          "id": "evidence",
+          "label": "Build Evidence Checklist"
+        },
+        {
+          "id": "plan",
+          "label": "Recommend Action Plan"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "id": "title-search",
+      "title": "Title Search Examination Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for title search examination.",
+      "table": "op_title_search",
+      "columns": [
+        {
+          "key": "orderId",
+          "label": "Title Order ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_orderId"
+        },
+        {
+          "key": "property",
+          "label": "Property",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_property"
+        },
+        {
+          "key": "vesting",
+          "label": "Current Vesting",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_vesting"
+        },
+        {
+          "key": "examinerNotes",
+          "label": "Examiner Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_examinerNotes"
+        }
+      ]
+    },
+    {
+      "id": "curative",
+      "title": "Curative Requirement Management Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for curative requirement management.",
+      "table": "op_curative",
+      "columns": [
+        {
+          "key": "requirementId",
+          "label": "Requirement ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_requirementId"
+        },
+        {
+          "key": "requirementType",
+          "label": "Requirement Type",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_requirementType"
+        },
+        {
+          "key": "targetDate",
+          "label": "Target Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_targetDate"
+        },
+        {
+          "key": "curativeNotes",
+          "label": "Curative Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_curativeNotes"
+        }
+      ]
+    },
+    {
+      "id": "payoff",
+      "title": "Payoff & Wire Verification Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for payoff & wire verification.",
+      "table": "op_payoff",
+      "columns": [
+        {
+          "key": "lender",
+          "label": "Payoff Lender",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_lender"
+        },
+        {
+          "key": "payoffAmount",
+          "label": "Payoff Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_payoffAmount"
+        },
+        {
+          "key": "callbackNumber",
+          "label": "Verified Callback Number",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_callbackNumber"
+        },
+        {
+          "key": "verificationNotes",
+          "label": "Verification Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_verificationNotes"
+        }
+      ]
+    },
+    {
+      "id": "escrow-fraud",
+      "title": "Escrow Fraud Detection Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for escrow fraud detection.",
+      "table": "op_escrow_fraud",
+      "columns": [
+        {
+          "key": "transactionId",
+          "label": "Transaction ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_transactionId"
+        },
+        {
+          "key": "riskSignal",
+          "label": "Risk Signal",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_riskSignal"
+        },
+        {
+          "key": "fundsAtRisk",
+          "label": "Funds at Risk",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_fundsAtRisk"
+        },
+        {
+          "key": "investigationNotes",
+          "label": "Investigation Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_investigationNotes"
+        }
+      ]
+    },
+    {
+      "id": "closing-disclosure",
+      "title": "Closing Disclosure Reconciliation Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for closing disclosure reconciliation.",
+      "table": "op_closing_disclosure",
+      "columns": [
+        {
+          "key": "closingId",
+          "label": "Closing ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_closingId"
+        },
+        {
+          "key": "cashToClose",
+          "label": "Cash to Close",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_cashToClose"
+        },
+        {
+          "key": "ledgerBalance",
+          "label": "Escrow Ledger Balance",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_ledgerBalance"
+        },
+        {
+          "key": "varianceNotes",
+          "label": "Variance Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_varianceNotes"
+        }
+      ]
+    },
+    {
+      "id": "disbursement",
+      "title": "Controlled Disbursement Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for controlled disbursement.",
+      "table": "op_disbursement",
+      "columns": [
+        {
+          "key": "closingId",
+          "label": "Closing ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_closingId"
+        },
+        {
+          "key": "disbursementAmount",
+          "label": "Disbursement Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_disbursementAmount"
+        },
+        {
+          "key": "recordingStatus",
+          "label": "Recording Status",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_recordingStatus"
+        },
+        {
+          "key": "releaseNotes",
+          "label": "Release Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_releaseNotes"
+        }
+      ]
+    },
+    {
+      "id": "recording",
+      "title": "Recording & Post-Closing Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for recording & post-closing.",
+      "table": "op_recording",
+      "columns": [
+        {
+          "key": "instrument",
+          "label": "Instrument",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_instrument"
+        },
+        {
+          "key": "county",
+          "label": "County",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_county"
+        },
+        {
+          "key": "recordingDate",
+          "label": "Recording Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_recordingDate"
+        },
+        {
+          "key": "recordingNotes",
+          "label": "Recording Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_recordingNotes"
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "title": "Title Policy Issuance Register",
+      "description": "Operational records, ownership, status, financial value, and evidence for title policy issuance.",
+      "table": "op_policy",
+      "columns": [
+        {
+          "key": "policyNumber",
+          "label": "Policy Number",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_policyNumber"
+        },
+        {
+          "key": "insured",
+          "label": "Insured",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_insured"
+        },
+        {
+          "key": "coverageAmount",
+          "label": "Coverage Amount",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_coverageAmount"
+        },
+        {
+          "key": "policyNotes",
+          "label": "Policy Notes",
+          "type": "textarea",
+          "required": false,
+          "dbKey": "data_policyNotes"
+        }
+      ]
+    },
+    {
+      "id": "closing-register",
+      "title": "Closing Register",
+      "description": "Orders, properties, buyers, sellers, lenders, dates, funds, and officers.",
+      "table": "op_closing_register",
+      "columns": [
+        {
+          "key": "closingId",
+          "label": "Closing ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_closingId"
+        },
+        {
+          "key": "property",
+          "label": "Property",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_property"
+        },
+        {
+          "key": "lender",
+          "label": "Lender",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_lender"
+        },
+        {
+          "key": "closingDate",
+          "label": "Closing Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_closingDate"
+        }
+      ]
+    },
+    {
+      "id": "party-register",
+      "title": "Closing Party Registry",
+      "description": "Parties, roles, identity verification, contact channels, and authorization.",
+      "table": "op_party_register",
+      "columns": [
+        {
+          "key": "party",
+          "label": "Party",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_party"
+        },
+        {
+          "key": "role",
+          "label": "Role",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_role"
+        },
+        {
+          "key": "verificationStatus",
+          "label": "Verification Status",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_verificationStatus"
+        },
+        {
+          "key": "verifiedDate",
+          "label": "Verified Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_verifiedDate"
+        }
+      ]
+    },
+    {
+      "id": "escrow-ledger",
+      "title": "Escrow Ledger",
+      "description": "Receipts, disbursements, file balances, bank balances, outstanding items, and reconciliation.",
+      "table": "op_escrow_ledger",
+      "columns": [
+        {
+          "key": "closingId",
+          "label": "Closing ID",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_closingId"
+        },
+        {
+          "key": "ledgerBalance",
+          "label": "Ledger Balance",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_ledgerBalance"
+        },
+        {
+          "key": "bankBalance",
+          "label": "Bank Balance",
+          "type": "currency",
+          "required": true,
+          "dbKey": "data_bankBalance"
+        },
+        {
+          "key": "reconciledDate",
+          "label": "Reconciled Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_reconciledDate"
+        }
+      ]
+    },
+    {
+      "id": "wire-instruction-register",
+      "title": "Verified Wire Instructions",
+      "description": "Payees, banks, masked accounts, call-back evidence, changes, and approvals.",
+      "table": "op_wire_instruction_register",
+      "columns": [
+        {
+          "key": "payee",
+          "label": "Payee",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_payee"
+        },
+        {
+          "key": "bank",
+          "label": "Bank",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_bank"
+        },
+        {
+          "key": "accountLast4",
+          "label": "Account Last 4",
+          "type": "text",
+          "required": true,
+          "dbKey": "data_accountLast4"
+        },
+        {
+          "key": "verifiedDate",
+          "label": "Verified Date",
+          "type": "date",
+          "required": true,
+          "dbKey": "data_verifiedDate"
+        }
+      ]
+    }
+  ],
+  "domainProduct": {
+    "home": "Title & Escrow Closing Command",
+    "context": "A transaction-control system for title examination, curative work, wire verification, escrow fraud, closing reconciliation, recording, and policy issuance.",
+    "features": [
+      {
+        "id": "title-exam",
+        "title": "Title Examination",
+        "description": "Review vesting, chain, liens, judgments, taxes, easements, legal description, and commitment exceptions.",
+        "view": "evidence",
+        "modules": [
+          "title-search",
+          "closing-register"
+        ],
+        "actions": [
+          {
+            "id": "approve-commitment",
+            "label": "Approve Title Commitment",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved title commitment and exceptions."
+          },
+          {
+            "id": "raise-requirement",
+            "label": "Raise Curative Requirement",
+            "nextStatus": "Investigating",
+            "auditDetail": "Raised title curative requirement."
+          }
+        ]
+      },
+      {
+        "id": "curative-desk",
+        "title": "Curative Desk",
+        "description": "Resolve releases, satisfactions, probate, entities, judgments, taxes, HOA, and legal-description defects.",
+        "view": "board",
+        "modules": [
+          "curative",
+          "party-register"
+        ],
+        "actions": [
+          {
+            "id": "accept-curative",
+            "label": "Accept Curative Evidence",
+            "nextStatus": "Approved",
+            "auditDetail": "Accepted curative evidence."
+          },
+          {
+            "id": "reject-curative",
+            "label": "Reject Curative Evidence",
+            "nextStatus": "Investigating",
+            "auditDetail": "Rejected incomplete curative evidence."
+          }
+        ]
+      },
+      {
+        "id": "wire-control",
+        "title": "Payoff & Wire Control",
+        "description": "Verify payoff parties and wire instructions through trusted channels, dual approval, and change detection.",
+        "view": "control",
+        "modules": [
+          "payoff",
+          "wire-instruction-register"
+        ],
+        "actions": [
+          {
+            "id": "release-wire",
+            "label": "Approve Verified Wire",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved verified wire instructions."
+          },
+          {
+            "id": "freeze-wire",
+            "label": "Freeze Suspicious Wire",
+            "nextStatus": "Review",
+            "auditDetail": "Frozen suspicious wire instruction."
+          }
+        ]
+      },
+      {
+        "id": "escrow-reconcile",
+        "title": "Escrow & Closing Reconciliation",
+        "description": "Tie lender CD, settlement statement, receipts, disbursements, payoffs, fees, and bank ledger.",
+        "view": "reconciliation",
+        "modules": [
+          "closing-disclosure",
+          "escrow-ledger"
+        ],
+        "actions": [
+          {
+            "id": "approve-close",
+            "label": "Approve Balanced Closing",
+            "nextStatus": "Approved",
+            "auditDetail": "Approved balanced closing statement and ledger."
+          },
+          {
+            "id": "open-shortage",
+            "label": "Open Escrow Shortage",
+            "nextStatus": "Investigating",
+            "auditDetail": "Opened escrow ledger shortage."
+          }
+        ]
+      },
+      {
+        "id": "post-closing",
+        "title": "Recording & Policy Issuance",
+        "description": "Control good funds, recording, trailing documents, exceptions, endorsements, policy premium, and delivery.",
+        "view": "deadline",
+        "modules": [
+          "recording",
+          "policy"
+        ],
+        "actions": [
+          {
+            "id": "issue-policy",
+            "label": "Issue Title Policy",
+            "nextStatus": "Approved",
+            "auditDetail": "Issued title policy after recording validation."
+          },
+          {
+            "id": "hold-policy",
+            "label": "Hold Policy Issuance",
+            "nextStatus": "Investigating",
+            "auditDetail": "Held policy for unresolved post-closing matter."
+          }
+        ]
+      }
+    ]
+  },
+  "integrations": [
+    {
+      "id": "integration-1",
+      "name": "Title plant",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-2",
+      "name": "Lender closing platform",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-3",
+      "name": "Escrow bank",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-4",
+      "name": "eRecording network",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    },
+    {
+      "id": "integration-5",
+      "name": "Identity verification",
+      "category": "Domain data source",
+      "mode": "Read-only demo connector"
+    }
+  ],
+  "featureCount": 40,
+  "seededRecords": 300,
+  "demoUsers": 3,
+  "apiPort": 5527,
+  "dbName": "profit_ai_title_escrow_fraud_curative"
+}
