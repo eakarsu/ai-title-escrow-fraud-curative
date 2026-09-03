@@ -1,0 +1,213 @@
+// Generated schema — modeled after beautyhqio conventions.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role     @default(ANALYST)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  ANALYST
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actorName String?
+  action    String
+  entity    String
+  entityId  String?
+  detail    String?
+  createdAt DateTime @default(now())
+}
+
+model ClosingFile {
+  id        String   @id @default(cuid())
+  fileNumber String
+  propertyAddress String
+  buyer String
+  seller String
+  purchasePrice Float
+  status String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  titleSearchs TitleSearch[]
+  lienRecords LienRecord[]
+  curativeItems CurativeItem[]
+  payoffStatements PayoffStatement[]
+  wireInstructions WireInstruction[]
+  fraudAlerts FraudAlert[]
+  disclosureReconciliations DisclosureReconciliation[]
+  escrowLedgers EscrowLedger[]
+  disbursementApprovals DisbursementApproval[]
+  recordingPackages RecordingPackage[]
+  policyIssuances PolicyIssuance[]
+}
+
+model TitleSearch {
+  id        String   @id @default(cuid())
+  underwriter String
+  examiner String
+  effectiveDate String
+  status String
+  searchedBy String
+  productType String
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LienRecord {
+  id        String   @id @default(cuid())
+  kind String
+  creditor String
+  amount Float
+  priority String
+  status String
+  recordedAt DateTime?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CurativeItem {
+  id        String   @id @default(cuid())
+  requirement String
+  kind String
+  owner String
+  status String
+  dueDate DateTime?
+  evidenceRef String?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PayoffStatement {
+  id        String   @id @default(cuid())
+  lender String
+  loanNumber String
+  payoffAmount Float
+  goodThrough DateTime?
+  status String
+  verifiedBy String
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WireInstruction {
+  id        String   @id @default(cuid())
+  beneficiary String
+  bankName String
+  routingLast4 String
+  accountLast4 String
+  status String
+  verifiedVia String
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FraudAlert {
+  id        String   @id @default(cuid())
+  signal String
+  severity String
+  detail String
+  status String
+  raisedAt DateTime?
+  assignee String?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DisclosureReconciliation {
+  id        String   @id @default(cuid())
+  buyerCd String
+  sellerCd String
+  variance Float
+  status String
+  version String
+  reconciledAt DateTime?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EscrowLedger {
+  id        String   @id @default(cuid())
+  period String
+  deposits Float
+  disbursements Float
+  balance Float
+  status String
+  reconciledAt DateTime?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DisbursementApproval {
+  id        String   @id @default(cuid())
+  payee String
+  amount Float
+  approverOne String
+  approverTwo String?
+  status String
+  requestedAt DateTime?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RecordingPackage {
+  id        String   @id @default(cuid())
+  county String
+  instrument String
+  status String
+  submittedAt DateTime?
+  recordingNumber String?
+  recordingFee Float
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PolicyIssuance {
+  id        String   @id @default(cuid())
+  policyNumber String
+  underwriter String
+  policyType String
+  coverageAmount Float
+  status String
+  issuedAt DateTime?
+  fileId String?
+  file ClosingFile? @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
