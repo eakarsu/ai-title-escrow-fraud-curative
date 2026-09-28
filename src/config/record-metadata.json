@@ -1,0 +1,536 @@
+{
+  "ClosingFile": {
+    "name": "ClosingFile",
+    "fields": [
+      {
+        "name": "fileNumber",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "propertyAddress",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "buyer",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "seller",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "purchasePrice",
+        "kind": "number",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      }
+    ]
+  },
+  "TitleSearch": {
+    "name": "TitleSearch",
+    "fields": [
+      {
+        "name": "underwriter",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "examiner",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "effectiveDate",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "searchedBy",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "productType",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "LienRecord": {
+    "name": "LienRecord",
+    "fields": [
+      {
+        "name": "kind",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "creditor",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "kind": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "name": "priority",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "recordedAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "CurativeItem": {
+    "name": "CurativeItem",
+    "fields": [
+      {
+        "name": "requirement",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "kind",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "owner",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "dueDate",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "evidenceRef",
+        "kind": "string",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "PayoffStatement": {
+    "name": "PayoffStatement",
+    "fields": [
+      {
+        "name": "lender",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "loanNumber",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "payoffAmount",
+        "kind": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "name": "goodThrough",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "verifiedBy",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "WireInstruction": {
+    "name": "WireInstruction",
+    "fields": [
+      {
+        "name": "beneficiary",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "bankName",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "routingLast4",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "accountLast4",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "verifiedVia",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "FraudAlert": {
+    "name": "FraudAlert",
+    "fields": [
+      {
+        "name": "signal",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "severity",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "detail",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "raisedAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "assignee",
+        "kind": "string",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "DisclosureReconciliation": {
+    "name": "DisclosureReconciliation",
+    "fields": [
+      {
+        "name": "buyerCd",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "sellerCd",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "variance",
+        "kind": "number",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "version",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "reconciledAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "EscrowLedger": {
+    "name": "EscrowLedger",
+    "fields": [
+      {
+        "name": "period",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "deposits",
+        "kind": "number",
+        "required": true
+      },
+      {
+        "name": "disbursements",
+        "kind": "number",
+        "required": true
+      },
+      {
+        "name": "balance",
+        "kind": "number",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "reconciledAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "DisbursementApproval": {
+    "name": "DisbursementApproval",
+    "fields": [
+      {
+        "name": "payee",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "kind": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "name": "approverOne",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "approverTwo",
+        "kind": "string",
+        "required": false
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "requestedAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "RecordingPackage": {
+    "name": "RecordingPackage",
+    "fields": [
+      {
+        "name": "county",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "instrument",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "submittedAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "recordingNumber",
+        "kind": "string",
+        "required": false
+      },
+      {
+        "name": "recordingFee",
+        "kind": "number",
+        "required": true
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  },
+  "PolicyIssuance": {
+    "name": "PolicyIssuance",
+    "fields": [
+      {
+        "name": "policyNumber",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "underwriter",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "policyType",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "coverageAmount",
+        "kind": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "name": "status",
+        "kind": "string",
+        "required": true
+      },
+      {
+        "name": "issuedAt",
+        "kind": "date",
+        "required": false
+      },
+      {
+        "name": "fileId",
+        "kind": "string",
+        "required": false,
+        "relation": "ClosingFile"
+      }
+    ],
+    "parent": {
+      "field": "fileId",
+      "entity": "ClosingFile"
+    }
+  }
+}

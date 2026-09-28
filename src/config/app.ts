@@ -124,21 +124,21 @@ export const entities: Record<string, EntityConfig> = {
 export const workflows: WorkflowConfig[] = [
   {
     slug: "curative-plan",
-    title: "Curative Planner",
+    title: "Draft: Curative Planner",
     description: "Build the curative plan for title defects.",
     prompt: "You are a title curative officer. For the described defect chain, produce a curative plan with requirements, responsible parties, and target dates.",
     fields: ["defects", "vestingIssue", "liens", "closingTarget"],
   },
   {
     slug: "wire-verify",
-    title: "Wire Fraud Analyzer",
+    title: "Draft: Wire Fraud Analyzer",
     description: "Score escrow/wire instruction compromise risk.",
-    prompt: "You are an escrow-fraud investigator. Score the wire-instruction change for BEC risk using account changes, email domain similarity, urgency patterns and callback evidence.",
+    prompt: "Draft a review of reported wire-change indicators and callback evidence. Do not claim to verify a bank account or callback, approve a wire, or execute disbursement.",
     fields: ["changeRequest", "previousInstruction", "emailMetadata", "callbackDone"],
   },
   {
     slug: "closing-summary",
-    title: "Closing Summary Drafter",
+    title: "Draft: Closing Summary Drafter",
     description: "Summarize a closing file for post-closing review.",
     prompt: "You are a post-closing auditor. Summarize the closing file: disbursements, recording status, policy issuance, open curative items.",
     fields: ["fileNumber", "disbursements", "recordingStatus", "openItems"],

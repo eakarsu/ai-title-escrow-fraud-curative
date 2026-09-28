@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-if [ -f .env ]; then set -a; source ./.env; set +a; fi
+if [ "${NODE_ENV:-}" != "test" ] && [ -z "${DATABASE_URL:-}" ] && [ -f .env ]; then set -a; source ./.env; set +a; fi
 if [ -z "${DATABASE_URL:-}" ]; then
   db_user="${PGUSER:-$(id -un)}"
   db_name="profit_ai_title_escrow_fraud_curative"

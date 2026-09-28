@@ -33,6 +33,9 @@ function seedValue(field, index) {
 }
 
 async function main() {
+  const dbName = new URL(process.env.DATABASE_URL || '').pathname.slice(1);
+  if (process.env.SEED_FORCE === '1' && (process.env.NODE_ENV !== 'test' || !/^inspection_test_[a-z0-9_]+$/.test(dbName))) throw new Error('Forced seeding requires an isolated inspection_test_ database in test mode');
+  if (process.env.NODE_ENV === 'production') throw new Error('Demo seeding is disabled in production');
   const client = await pool.connect();
   try {
     const existing = await client.query('SELECT COUNT(*)::int count FROM app_users');

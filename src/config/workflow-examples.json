@@ -1,0 +1,98 @@
+{
+  "curative-plan": [
+    {
+      "id": "example-1",
+      "label": "Lien release",
+      "values": {
+        "defects": "Recorded mortgage release missing",
+        "vestingIssue": "Seller name matches deed; release still outstanding",
+        "liens": "Example mortgage lien; payoff evidence unverified",
+        "closingTarget": "2026-10-15"
+      }
+    },
+    {
+      "id": "example-2",
+      "label": "Vesting mismatch",
+      "values": {
+        "defects": "Deed uses prior entity name",
+        "vestingIssue": "Example seller LLC changed its legal name",
+        "liens": "No liens reported in supplied summary; search incomplete",
+        "closingTarget": "2026-11-02"
+      }
+    },
+    {
+      "id": "example-3",
+      "label": "Probate gap",
+      "values": {
+        "defects": "Estate conveyance documents incomplete",
+        "vestingIssue": "Personal representative authority not supplied",
+        "liens": "Example tax lien requires disposition evidence",
+        "closingTarget": "2026-12-01"
+      }
+    }
+  ],
+  "wire-verify": [
+    {
+      "id": "example-1",
+      "label": "Changed instructions",
+      "values": {
+        "changeRequest": "Example email requests a new beneficiary account one day before closing",
+        "previousInstruction": "Prior instruction references fictitious account ending 0001",
+        "emailMetadata": "Display name matches; reply-to differs; headers need review",
+        "callbackDone": "No independent callback; hold for trusted verification."
+      }
+    },
+    {
+      "id": "example-2",
+      "label": "Callback pending",
+      "values": {
+        "changeRequest": "Example request changes routing details after an invoice resend",
+        "previousInstruction": "Prior instruction references fictitious account ending 0002",
+        "emailMetadata": "New sending domain differs from the established contact domain",
+        "callbackDone": "Callback scheduled using a previously verified number; not completed."
+      }
+    },
+    {
+      "id": "example-3",
+      "label": "Conflicting evidence",
+      "values": {
+        "changeRequest": "Example beneficiary change conflicts with the signed closing package",
+        "previousInstruction": "Signed instruction references fictitious account ending 0003",
+        "emailMetadata": "Forwarded message lacks original headers",
+        "callbackDone": "Caller reports verification but no independent evidence is stored."
+      }
+    }
+  ],
+  "closing-summary": [
+    {
+      "id": "example-1",
+      "label": "Recording pending",
+      "values": {
+        "fileNumber": "EXAMPLE-FILE-101",
+        "disbursements": "Draft ledger: seller 200000 USD; fees 5000 USD; funds not released",
+        "recordingStatus": "Submission receipt pending",
+        "openItems": "Confirm recording receipt and independently approved wire instructions."
+      }
+    },
+    {
+      "id": "example-2",
+      "label": "Disbursement hold",
+      "values": {
+        "fileNumber": "EXAMPLE-FILE-202",
+        "disbursements": "Draft ledger: payoff 150000 USD; balance held pending review",
+        "recordingStatus": "Documents prepared; not submitted",
+        "openItems": "Resolve payoff discrepancy and obtain independent callback evidence."
+      }
+    },
+    {
+      "id": "example-3",
+      "label": "Post-close review",
+      "values": {
+        "fileNumber": "EXAMPLE-FILE-303",
+        "disbursements": "Fictional reconciliation balanced at 350000 USD; obtain real receipts",
+        "recordingStatus": "Reported recorded; recording reference requires validation",
+        "openItems": "Review final policy exceptions and receipt provenance."
+      }
+    }
+  ]
+}
