@@ -7,6 +7,7 @@ import express from 'express';
 import helmet from 'helmet';
 import jwt from 'jsonwebtoken';
 import pg from 'pg';
+import { mountOperationalRecordActions, recordPermissions } from './operationalRecordActions.mjs';
 
 const backendRoot = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.dirname(backendRoot);
@@ -73,7 +74,7 @@ function normalizedResult(content, workflow, analysisType, providerMeta) {
     disclaimer: 'Draft based on submitted inputs. Source systems were not queried. No calibrated risk or confidence score has been produced.' };
 }
 
-export async function callOpenRouter(workflow, inputs, analysisType) {
+export async function callOpenRouter(workflow, inputs, analysisType, signal) {
   const status = aiStatus();
   if (!status.configured) {
     const error = new Error('OpenRouter is not configured. Set OPENROUTER_API_KEY, OPENROUTER_MODEL, and OPENROUTER_BASE_URL in .env.');
@@ -87,7 +88,7 @@ export async function callOpenRouter(workflow, inputs, analysisType) {
     method: 'POST',
     headers: { Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`, 'Content-Type': 'application/json', 'HTTP-Referer': `http://127.0.0.1:${process.env.UI_PORT || config.port}`, 'X-OpenRouter-Title': config.title },
     body: JSON.stringify({ model: status.model, messages: [{ role: 'system', content: system }, { role: 'user', content: prompt }], temperature: 0.2, max_tokens: 1200 }),
-    signal: AbortSignal.timeout(60_000),
+    signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(60_000)]) : AbortSignal.timeout(60_000),
   });
   if (!response.ok) {
     const error = new Error(`OpenRouter returned HTTP ${response.status}`);
@@ -155,7 +156,8 @@ export function createApp() {
     res.json({ token: jwt.sign(identity, sessionSecret, { expiresIn: '1h', algorithm: 'HS256', issuer: config.id, audience: config.id }), user: identity });
   });
   app.use('/api', auth);
-  app.get('/api/app', (req, res) => res.json({ ...config, user: req.user, ai: aiStatus() }));
+  mountOperationalRecordActions(app, { pool, config, identifier, audit });
+  app.get('/api/app', (req, res) => res.json({ ...config, user: req.user, ai: aiStatus() , recordPermissions: recordPermissions(req.user) }));
   app.get('/api/dashboard', async (_req, res) => {
     const [records, attention, recent, analyses] = await Promise.all([
       pool.query('SELECT COUNT(*)::int count FROM workflow_cases'),
@@ -227,6 +229,10 @@ export function createApp() {
   app.get('/api/audit-events', async (_req, res) => res.json({ items: (await pool.query('SELECT * FROM audit_events ORDER BY event_time DESC,id DESC LIMIT 100')).rows }));
   app.get('/api/integrations', async (_req, res) => res.json({ items: (await pool.query('SELECT * FROM integration_state ORDER BY name')).rows.map(item => ({...item,status:'Unconfigured in compatibility runtime',last_tested:null})) }));
   app.post('/api/ai/analyze', async (req, res, next) => {
+    const aiRequestController = new AbortController();
+    const onAIRequestClose = () => { if (!res.writableEnded) aiRequestController.abort(); };
+    res.once('close', onAIRequestClose);
+    res.once('finish', () => res.removeListener('close', onAIRequestClose));
     try {
       const workflow = config.workflows.find(item => item.id === req.body?.workflowId);
       const analysisType = String(req.body?.analysisType || 'assess');
@@ -242,14 +248,14 @@ export function createApp() {
         if (recent.rows[0].count >= 20) failure('Hourly analysis limit reached',429);
         await audit(client, req.user.email, 'AI analysis requested', 'AI workflow', workflow.id, analysisType);
       });
-      const result = await callOpenRouter(workflow, inputs, analysisType);
+      const result = await callOpenRouter(workflow, inputs, analysisType, aiRequestController.signal);
       const client = await pool.connect();
       try { await client.query('BEGIN');
         const saved = await client.query('INSERT INTO saved_analyses(workflow_id,actor,analysis_type,inputs,result,provider,model) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id', [workflow.id,req.user.email,analysisType,inputs,result,'openrouter',result.model]);
         await audit(client,req.user.email,'AI draft saved','AI workflow',workflow.id,JSON.stringify({receipt:result.providerReceipt,model:result.model}));
         await client.query('COMMIT'); res.json({...result,analysisId:saved.rows[0].id});
       } catch(error) { await client.query('ROLLBACK'); throw error; } finally { client.release(); }
-    } catch (error) { next(error); }
+    } catch (error) { (!res.destroyed && next(error)); }
   });
   app.post('/api/ai/save', async (req, res) => {
     if (!Number.isSafeInteger(Number(req.body?.analysisId)) || Number(req.body?.analysisId) < 1) return res.status(422).json({error:'A server-generated analysis id is required'});
